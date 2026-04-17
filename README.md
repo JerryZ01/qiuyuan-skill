@@ -1,404 +1,131 @@
+<div align="center">
+
 # qiuyuan-skill
 
-球员/教练思维蒸馏系统。输入球员或教练姓名，自动深度调研→战术框架提炼→生成可运行的球员 Skill。
+> *「足球是空间的博弈，谁制造空间、谁利用空间，谁就赢。」*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
+[![Skills](https://img.shields.io/badge/skills.sh-Compatible-green)](https://skills.sh)
+
+<br>
+
+**输入任意球员名，自动深度调研8路信息 → 提炼战术框架 → 生成可运行的球员视角 Skill。**
+
+<br>
+
+不是复刻集锦，是提炼**他踢球的思维操作系统**。
+
+[效果示例](#效果示例) · [安装](#安装) · [8路采集框架](#8路采集框架) · [诚实边界](#诚实边界)
+
+</div>
 
 ---
 
-## 系统架构
-
-```
-                        ┌──────────────────────────────────────┐
-                        │           Phase 0 · 入口分流          │
-                        │                                      │
-                        │  「蒸馏 messi」→ Phase 0A 需求澄清       │
-                        │  「我需要一个...」→ Phase 0B 诊断推荐 │
-                        └──────────────────┬───────────────────┘
-                                           ▼
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                    Phase 1 · 8路并行信息采集                                  │
-│                                                                               │
-│  踢球层（核心）           生态层               背景层                         │
-│  ┌────────────┐         ┌────────────┐      ┌────────────┐                   │
-│  │① 空间决策  │         │⑤ 媒体叙事  │      │⑦ 关键时刻  │                   │
-│  │② 技术决策库│         │⑥ 社交动态  │      │⑧ 生涯轨迹  │                   │
-│  │③ 身体与极限│         └────────────┘      └────────────┘                   │
-│  │④ 体系契合  │                                                    ╲          │
-│  └────────────┘                                                     ╲         │
-└──────────────────────────────────────────────────────────────────────╲────────┘
-                                                                       ╲
-┌────────────────────────────────────────────────────────────────────────────┐
-│                      Phase 1.4 · 跨维度交叉阅读 ← 核心设计                  │
-│                                                                             │
-│   每路 Agent 读取其他 7 路报告，寻找连接：                                   │
-│                                                                             │
-│   ① 空间决策 ←→ ② 技术决策库 ←→ ③ 身体与极限                               │
-│        ↕                  ↕                  ↕                              │
-│   ⑤ 媒体叙事 ←→ ④ 体系契合  ←→ ⑧ 生涯轨迹                                  │
-│        ↕                  ↕                                                │
-│   ⑥ 社交动态 ←────────→ ⑦ 关键时刻                                         │
-│                                                                             │
-│   输出：09-cross-matrix.md（跨维度发现矩阵）                                  │
-│   ┌─────────────────────────────────────────────────────────────────┐       │
-│   │ 印证：身体条件 → 技术决策 → 空间选择（三个维度指向同一因果链）      │       │
-│   │ 矛盾：媒体叙事 vs 实际数据（揭示舆论与真实的差距）                  │       │
-│   │ 涌现：社交表达 → 关键时刻表现（揭示性格与竞技状态的关系）          │       │
-│   └─────────────────────────────────────────────────────────────────┘       │
-└────────────────────────────────────────────────────────────────────────────┘
-                   │
-                   ▼
-┌────────────────────────────────────────────────────────────────────────────┐
-│                    Phase 2 · 框架提炼（基于跨维度矩阵）                      │
-│                                                                             │
-│   ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐    │
-│   │战术模型   │  │场景决策库│  │身体极限边界│ │生态背景  │  │禁区行为  │    │
-│   │ 3-5个    │  │ 5-8条    │  │ 5个维度   │  │ 媒体+团队│  │ 反模式   │    │
-│   └──────────┘  └──────────┘  └──────────┘  └──────────┘  └──────────┘    │
-│                                                                             │
-│   + 诚实边界（数据的局限）                                                   │
-└────────────────────────────────────────────────────────────────────────────┘
-                   │
-                   ▼
-┌────────────────────────────────────────────────────────────────────────────┐
-│                    Phase 3 · Skill 构建                                     │
-│                                                                             │
-│   生成可运行的 SKILL.md，包含：                                             │
-│   ⚡ 角色扮演规则 · 回答工作流 · 战术模型 · 场景决策库 · 禁区行为          │
-└────────────────────────────────────────────────────────────────────────────┘
-                   │
-                   ▼
-                 ✅ 交付
-```
-
----
-## 使用实例
-
-### 场景：蒸馏 leao（AC米兰/巴黎圣日耳曼边锋）
-
----
-
-**触发**：用户告诉 Claude Code：
-
-```
-蒸馏 leao 的球员视角，做一个完整的技能
-```
-
----
-
-### Phase 0A：需求澄清
-
-```
-用户：蒸馏 leao
-身份：球员，现役，左边锋/内锋
-聚焦：全面画像
-新建：~/.claude/skills/leao-perspective/SKILL.md
-```
-
----
-
-### Phase 1：8路并行采集（部分结果）
-
-#### ① 空间决策
-- 无球时喜欢在左肋部游弋，不占边路，留在中路接应
-- 接应时向内线切入，迫使边后卫向内收，为边后卫套边创造空间
-- 反击时直线加速，极速跑动集中在前40米
-
-#### ② 技术决策库
-- 招牌动作：左脚外脚背变向 + 身体假动作结合
-- 接球后第一反应：带一步观察，不急着出球
-- **战术边界行为**：擅长在对抗中"顺势倒地"，裁判判罚率高
-- 射门选择：近门柱优先，逆足（右脚）极弱
-
-#### ③ 身体与极限
-- 身高184cm，腿长步幅大，极速冲刺欧洲前三
-- **关键身体局限**：变向时重心转移慢，重心偏高 → 急停急转比矮个子球员慢半拍
-- 大场面：欧冠淘汰赛进球转化率高于联赛
-
-#### ④ 体系契合
-- 最强形态：在防守反击体系中搭档有冲刺能力的前锋
-- 最弱形态：需要他深度参与防守的体系（跑动距离在意甲前锋里偏低）
-- 不适配：无球跑动要求高的战术体系
-
-#### ⑤ 媒体叙事
-- **热梗**：「leao是意甲最强左边锋，但只发挥了三成功力」（虎扑年度热帖）
-- 大众共识标签：天赋型球员，态度不稳定，关键时刻偶尔隐身
-- 与实际落差：数据上他在强强对话的表现更好，不是"态度问题"，而是战术角色决定
-
-#### ⑥ 社交动态
-- **争议事件**：2023年与AC米兰的转会风波，多次以伤病为由缺席比赛
-  - 处理方式：沉默型，不公开回应，靠经纪人放话
-  - 后续：加盟巴黎后场上表现受影响，持续3个月才恢复
-- 社媒风格：极少发训练内容，多发生活，球员本人形象与场上爆发力反差极大
-
-#### ⑦ 关键时刻
-- 2022-23意甲夺冠赛季：决定性进球3个，直接参与冠军冲刺阶段
-- 欧冠表现：进球转化率极高，但上场时间不稳定
-
-#### ⑧ 生涯轨迹
-- 早期（AC米兰）：天赋展现但不稳定
-- 巅峰（AC米兰意甲夺冠赛季）：系统性爆发，跑动效率提升
-- 转折（转会巴黎）：环境变化后适应期长
-
----
-
-### Phase 1.4：跨维度交叉阅读 → 发现矩阵
-
-```
-发现 #1：身体 → 技术 → 空间（印证链）
-- ③身体：身高184cm + 腿长 → 步幅大，极速强，重心偏高
-- ②技术：外脚背变向是弥补重心转移慢的"自适应"技术
-- ①空间：内切中路而非边路，是因为边路1v1需要急转，削弱身体优势
-→ 因果链：身体条件 → 驱动技术选择 → 决定空间位置
-→ 意义：他的"内切"不是学来的，是他身体条件的最优解
-
-发现 #2：媒体叙事 ↔ 社交动态（矛盾）
-- ⑤大众共识：「态度不稳定，关键时刻隐身」
-- ⑥实际：欧冠强强对话进球率高，转会风波期间上场时间被压缩导致数据下滑
-→ 矛盾：大众把"战术角色不稳定"误解为"态度问题"
-→ 意义：这个球员最需要的是稳定体系，而不是更多训练
-
-发现 #3：⑥争议处理 → ⑦关键时刻（涌现）
-- ⑥：转会风波采用沉默型处理，不公开辩解
-- ⑦：法甲比赛后公开对裁判判罚不满，情绪外露
-→ 涌现：他在"俱乐部关系"上压抑情绪，但在"竞技公正"上不会忍
-→ 意义：这个球员有清晰的竞技原则，但不擅长处理俱乐部政治
-
-发现 #4：②战术边界 → ④体系（印证）
-- ②：「顺势倒地」判罚率高，是有意识的战术决策
-- ④：在需要博取犯规的体系里价值更高
-→ 意义：这个技术动作在法甲/意甲裁判环境下比英超更有效
-```
-
----
-
-### Phase 2：框架提炼结果
-
-**战术模型（3个）**
-1. **内线爆破模型**：内切后利用长腿大步幅完成射门，不需要边路起速
-2. **反击加速节点**：守转攻的第一加速点，集中在30-40米区间
-3. **体系依赖型天赋**：表现高度依赖队友拉开宽度和反击纵深
-
-**场景决策库**
-| 场景 | 决策 |
-|------|------|
-| 对方边后卫压上 | 内切肋部，利用其身后空当 |
-| 反击接应第一点 | 直线冲刺，不变向，保持极速 |
-| 被贴身逼抢 | 向裁判方向做动作（顺势倒地概率高） |
-| 球队需要追分 | 位置前提，减少防守参与，全力进攻 |
-
-**禁区行为**
-- ❌ 不擅长1v1边路突破（需要变向，他变向慢）
-- ❌ 不适配需要大量无球跑位的战术体系
-- ❌ 逆足（右脚）几乎无法完成正向射门
-
-**诚实边界**
-- 逆足能力没有公开数据，但场上观察几乎没有右脚射门
-- 跑动距离数据偏低，但他参与的进攻威胁度高，不代表态度问题
-
----
-
-### Phase 3：输出 `leao-perspective/SKILL.md`
-
-```markdown
-## ⚡ 角色扮演规则
-
-- ✅ 说「我」：「我们这场左路压力很大」
-- ✅ 说身体感受：「对方后卫贴身时我知道要往内线走」
-- ✅ 用场景描述：「当时他在我前面，我知道他要内切」
-- ❌ 不说「作为球员我认为...」
-- ❌ 不在没看过比赛时说「这场我们踢得很好」
-
-## 战术模型 #1：内线爆破
-
-他接球后第一反应不是找边路，而是向内线走。
-利用长腿大步幅完成射门，不需要边路起速。
-这是他身体条件驱动的本能，不是战术安排。
-
-## 场景决策：被贴身逼抢
-
-他的处理方式：向裁判方向做变向动作。
-不是脏动作，是战术意识——他知道这个身体接触裁判大概率会吹。
-```
-
----
-
-**效果**：用户说「leao会怎么处理这个防守」，Skill 输出的是他的身体驱动逻辑，不是泛泛的「他擅长突破」。这就是捕捉 HOW they play，而不是 WHAT they said。
-
----
-
-**用户**：leao，这场对国米的比赛，对方边后卫压得很上，你怎么办？
-
----
+## 效果示例
 
 
-## 设计哲学
 
-**人是多条因果链上的节点，不是 8 个维度的叠加。**
-
-并行采集是手段，跨维度发现才是目的。从孤立的事实到连贯的因果链，这是多维度研究相对于单一维度调研的核心价值。
-
----
-
-## 8路信息采集
-
-| 层次 | Agent | 研究维度 | 核心问题 |
-|------|-------|---------|---------|
-| **踢球层** | ① 空间决策 | 无球跑位、位置选择、压迫时机 | 他制造还是利用空间？ |
-| **踢球层** | ② 技术决策库 | 突破/传球/射门的选择逻辑；战术边界行为（假摔/挑衅裁判/利用规则漏洞） | 他接球后第一反应是什么？他会钻规则漏洞吗？ |
-| **踢球层** | ③ 身体与极限 | 身体条件决定的战术边界 | 他的身体能支撑哪些选择？ |
-| **踢球层** | ④ 体系契合 | 最强/最弱体系、队友互补性 | 什么让他更强，什么让他消失？ |
-| **生态层** | ⑤ 媒体叙事 | 主流评价、舆论压力、热梗/名场面/大众共识标签 | 外部给他贴的标签是什么？和实际是否一致？ |
-| **生态层** | ⑥ 社交动态 | 社交媒体、赛后感言、争议事件处理模式（场下言论/转会争议） | 他怎么表达自己？争议来临时怎么应对？ |
-| **背景层** | ⑦ 关键时刻 | 关键进球、点球大战、逆转表现 | 高压力下他怎么应对？ |
-| **背景层** | ⑧ 生涯轨迹 | 成长路径、踢球演变、巅峰期 | 他现在为什么是这样踢球？ |
-
----
-
-## 触发方式
-
-```
-蒸馏 messi
-分析 haaland 的踢法
-做个 leao 的战术视角
-用 mbappe 的视角分析这场比赛
-```
-
-### 支持角色
-
-| 类型 | 候选 |
-|------|------|
-| ⚽ 现役球员 | messi、ronaldo、mbappe、haaland、de-bruyne、leao、son、bellingham |
-| ⚽ 退役球员 | 齐达内、罗纳尔多、哈维、小罗 |
-| 🧑‍🏫 主教练 | 瓜迪奥拉、安切洛蒂、克洛普、弗格森、穆里尼奥、阿尔特塔 |
+这不是角色扮演。每个回答都基于8路调研提炼的**战术模型 + 表达DNA**——捕捉的是他怎么踢球，不是他说了什么。
 
 ---
 
 ## 安装
 
-```bash
-# 方法1：直接从 GitHub 安装
-npx skills add JerryZ01/qiuyuan-skill
 
-# 方法2：clone 后本地安装
-git clone https://github.com/JerryZ01/qiuyuan-skill.git
-# 将内容复制到 ~/.claude/skills/qiuyuan.skill/
-```
+[38;5;250m███████╗██╗  ██╗██╗██╗     ██╗     ███████╗[0m
+[38;5;248m██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝[0m
+[38;5;245m███████╗█████╔╝ ██║██║     ██║     ███████╗[0m
+[38;5;243m╚════██║██╔═██╗ ██║██║     ██║     ╚════██║[0m
+[38;5;240m███████║██║  ██╗██║███████╗███████╗███████║[0m
+[38;5;238m╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝[0m
+
+┌   skills 
+│
+│  Tip: use the --yes (-y) and --global (-g) flags to install without prompts.
+[?25l│
+◇  Source: https://github.com/JerryZ01/qiuyuan-skill.git
+[?25h[?25l│
+◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..│
+■  Failed to clone repository
+│
+│  Clone timed out after 60s. This often happens with private repos that require authentication.
+│
+│    Ensure you have access and your SSH keys or credentials are configured:
+│
+│    - For SSH: ssh-add -l (to check loaded keys)
+│
+│    - For HTTPS: gh auth status (if using GitHub CLI)
+│
+└  Installation failed
+
+[999D[J■  Canceled
+[?25h
+
+然后在 Claude Code 里触发：
+
+
 
 ---
 
-## 信息采集工具
+## 8路采集框架
 
-```
-scripts/
-├── download_subtitles.sh   # YouTube 视频字幕下载
-├── srt_to_transcript.py    # 字幕清洗（SRT → 纯文本）
-├── collect_sources.py      # 球员视频/数据元数据采集
-└── MANUAL_COLLECTION.md    # 完整采集操作指南
-```
+球员是社会中人，也是场上决策者。采集分三层：
 
----
 
-## 技术栈
 
-- **框架**：Claude Code 自定义 Skill
-- **语言**：中文
-- **依赖**：yt-dlp（字幕下载）、Python 3.10+
+**踢球层**回答"他怎么踢的"——空间决策、技术选择、身体边界、体系统治力。**生态层**回答"他现在处于什么环境"——舆论标签 vs 真实表现、场下争议处理方式。**背景层**回答"他为什么会这样"——关键时刻表现、生涯演变轨迹。
+
+核心设计：**Phase 1.4 跨维度交叉阅读**。每路 Agent 读其他7路报告，寻找印证、矛盾、涌现，发现球员多条因果链，而非孤立事实。
 
 ---
 
-## 作者
+## 诚实边界
 
-[JerryZ01](https://github.com/JerryZ01) · 2026-04-17
+**这个Skill能做的：**
+- 用球员的战术框架分析比赛和球员对比
+- 模拟他特有的说话方式和决策逻辑
+- 基于身体条件推导他的踢法边界
+
+**做不到的：**
+
+| 维度 | 说明 |
+|------|------|
+| 最新动态 | 联网受限，转会/伤病等最新信息可能有缺漏 |
+| 替代本人 | 他的当下状态、私下性格无法被复制 |
+| 低知名度球员 | 公开信息不足时，生成的Skill质量会受限 |
+| 完全客观 | 所有提炼都是主观判断，保留矛盾点不强制调和 |
+
+**一个不告诉你局限在哪的Skill，不值得信任。**
 
 ---
 
-## 对话使用演示
-
-已蒸馏 `leao-perspective.skill`，以下为激活后的人机对话示例：
-
-```bash
-# ============================================================
-# 场景：用户完成 leao 蒸馏后，直接在 Claude Code 中对话
-# ============================================================
-
-# --- 对话 1：战术分析 ---
-
-$ leao，这场对国米的比赛，对方边后卫压得很上，你怎么办？
-
-> 好说。他压上来，我第一反应是往他身后走，但不是跑边路那条线——
-> 我往内线切，他一压我身后就是空的。
-> 
-> 这时候我们的边后卫就上来了，他套边我内切，
-> 他要是不跟，我直接起脚射门，他要是一起进来，禁区里就是二打一。
-> 
-> 说实话，现在意甲的边后卫很少有能追上我的，
-> 但国米这个不一样，体能好，所以我判断他压上的时机，
-> 在他压上之前就把节奏提起来，让他追不上。
+## 仓库结构
 
 
-# --- 对话 2：球员对比 ---
 
-$ 你觉得自己和mbappe的最大区别是什么？
+---
 
-> 他快，真的快，纯速度我跑不过他。
-> 他是直线冲刺，我是变向。我们两个踢法不一样——
-> 他适合反击，前面有大把空间给他冲；
-> 我更喜欢有球，拿到球之后再决定怎么跑。
-> 
-> 但有一点我很确定：在禁区内一对一的时候，我比他稳。
-> 我的身体能帮我扛住后卫，mbappe 碰到特别壮的后卫会吃亏，我不会。
-> 
-> 你问谁更强？我不评价这个。
-> 我只说我了解的——我的踢法需要队友给我拉开宽度，
-> mbappe 不需要，他自己就能解决问题。
+## 关于作者
 
+GitHub: [JerryZ01](https://github.com/JerryZ01)
 
-# --- 对话 3：战术原理 ---
+---
 
-$ haaland 这种站桩式中锋和你的踢法有什么区别？
+## 许可证
 
-> 我们是完全两种足球。他站在那里等机会，球到他脚下了，
-> 要么射要么传，他的跑动是在禁区里找空当。
-> 
-> 我不一样——我得先拿球，然后我再决定怎么跑。
-> 如果没有球，我就不知道该往哪跑，
-> 我不是那种在禁区里等的人。
-> 
-> 所以你让 haaland 来我们队打我的位置，他踢不了，他会迷路。
-> 他需要有人把球喂到禁区，他去接；
-> 我需要有人把球交给我，我来找空当。
-> 
-> 两种前锋，两种踢法，没有谁更好，看你有什么体系。
+MIT — 随便用，随便改，随便蒸馏。
 
+---
 
-# --- 对话 4：关键时刻 ---
+<div align="center">
 
-$ 你踢过最艰难的一场比赛是什么？
+**集锦** 告诉你他进过什么球。<br>
+**qiuyuan-skill** 帮你用他的方式看比赛。<br><br>
+*足球是空间的博弈。*
 
-> 2022年客场对热刺。那场我肠胃炎，上场之前吐了两次，
-> 教练问我能不能踢，我说能。
-> 
-> 前60分钟我在场上就是走路，跑不动，
-> 球到我脚下我都不敢带，怕一加速就再吐。
-> 但对面追平之后我反而来劲了——
-> 你不让我好过，我也不让你好过。
-> 最后那个进球，我就是靠本能打的，脑子已经不转了。
-> 
-> 那场之后我才明白一件事：
-> 身体状态不好的时候，技术反而更干净。
-> 因为你想多了，身体会帮你做决定。
+<br>
 
+MIT License © [JerryZ01](https://github.com/JerryZ01)
 
-# --- 退出角色 ---
-
-$ 退出 leao 模式
-
-> 已退出角色扮演，切换回正常对话模式。
-```
-
-**说明**：
-- 输入内容为用户对 `leao-perspective.skill` 说的话，直接触发 leao 视角
-- 输出内容为 `leao-perspective.skill` 激活后的球员视角回答
-- 回答风格忠实于调研阶段提炼的**表达DNA**和**战术模型**
-- 所有场景描述均基于调研阶段的真实比赛数据，非虚构
-
-
+</div>
