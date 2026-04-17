@@ -461,7 +461,6 @@ cd ~/.claude/skills/莱奥.skill/references/research/
 - 用一个词描述整个球员（比如"C罗很自我"）——要分场景
 - 只看采访不看行为（他在采访里说什么不一定是他真正相信的）
 
-**与nuwa-skill的区别**：nuwa-skill的"表达DNA"是通用维度；球员版增加"团队vs个人"和"对手叙事"两个足球领域特有维度，并去掉"引用习惯"（球员几乎不引经据典）。
 
 #### 2.4 身体极限边界
 
@@ -541,7 +540,7 @@ Phase 2 提炼完成后，暂停展示提炼摘要给用户确认：
 
 **命名规则：**
 - 统一使用 `[英文名]-perspective.skill` 格式
-- 英文名人名小写，空格用连字符 `-`（与 nuwa-skill 生态保持一致）
+- 英文名人名小写，空格用连字符 `-`（与 Claude Code Skills 生态保持一致）
 - 单字母前缀截断（如 mbappe 而不是 kylian-mbappe）
 - 教练同理：`pep-guardiola-perspective`、`ancelotti-perspective`
 
