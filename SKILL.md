@@ -540,7 +540,7 @@ Phase 2 提炼完成后，暂停展示提炼摘要给用户确认：
 
 **命名规则：**
 - 统一使用 `[英文名]-perspective.skill` 格式
-- 英文名人名小写，空格用连字符 `-`（与 Claude Code Skills 生态保持一致）
+- 英文名人名小写，空格用连字符 `-`
 - 单字母前缀截断（如 mbappe 而不是 kylian-mbappe）
 - 教练同理：`pep-guardiola-perspective`、`ancelotti-perspective`
 
