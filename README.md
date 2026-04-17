@@ -151,8 +151,6 @@ npx skills add JerryZ01/qiuyuan-skill
 
 **设计哲学**：人是多条因果链上的节点，不是 8 个维度的叠加。并行采集是手段，跨维度发现才是目的。
 
-├──「蒸馏 leao」→ Phase 0A 需求澄清
-└──「我需要一个...」→ Phase 0B 诊断推荐
 
 Phase 1 · 8路并行信息采集
 │
