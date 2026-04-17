@@ -75,8 +75,16 @@ def check_skill(path: str) -> dict:
     else:
         results.append(("诚实边界", "FAIL", f"仅{len(honest_lines)}条诚实边界，建议至少3条"))
 
-    # ── 检查6：身份卡存在且有内容 ─────────────────────────────────
-    has_identity = bool(re.search(r'## 身份卡|## Identity', content))
+    # ── 检查6：表达DNA推导规则（Phase 2.3→Phase 3的链路）─────────────
+    dna_rules = re.findall(r'表达DNA.*规则|确定性规则|情绪规则|词汇规则|团队.*规则|话题禁区|幽默规则', content)
+    dna_count = len(dna_rules)
+    if dna_count >= 5:
+        results.append(("表达DNA规则覆盖", "PASS", f"找到{dna_count}条表达DNA推导规则"))
+    else:
+        results.append(("表达DNA规则覆盖", "FAIL", f"仅{dna_count}条，建议至少5条具体说话方式规则"))
+
+    # ── 检查7：身份卡存在且有内容 ─────────────────────────────────
+    has_identity = bool(re.search(r'## 身份卡|## Identity', open(path, encoding="utf-8", errors="ignore").read()))
     identity_lines = [l for l in lines if re.search(r'我是|身份卡|identity', l, re.IGNORECASE)]
     if has_identity and len(identity_lines) >= 2:
         results.append(("身份卡", "PASS", "身份卡section存在"))
@@ -91,7 +99,7 @@ def check_skill(path: str) -> dict:
     else:
         results.append(("AI模板味检测", "WARN", f"发现{ai_hits}处疑似AI模板表达，建议替换为球员真实语气"))
 
-    # ── 检查8：跨维度矩阵引用 ─────────────────────────────────────
+    # ── 检查9：跨维度矩阵引用 ─────────────────────────────────────
     has_cross = bool(re.search(r'跨维度|印证|矛盾|涌现', content))
     cross_count = content.count("印证") + content.count("矛盾") + content.count("涌现")
     if cross_count >= 3:
