@@ -90,7 +90,7 @@ qiuyuan.skill 运行时涉及两层状态：
 ```bash
 # 使用 sessions_spawn 工具，同时启动 8 个独立 subagent
 # 每个 subagent 用 run mode，target_dir 指向同一个研究目录
-# 8 个 subagent 完成后，主 session 继续做 Phase 1.4 和 Phase 2
+# 8 个 subagent 完成后，主 session 继续做 Phase 1.9 和 Phase 2
 ```
 
 每个 subagent 的任务（完整 prompt）见 Phase 1 的 Agent 任务定义。
@@ -98,8 +98,8 @@ subagent 完成后，将结果写入 `references/research/0X-xxx.md`（见输出
 
 **主 session 在所有 subagent 完成后负责**：
 1. 读取全部 9 个报告文件
-2. 执行 Phase 1.4（跨维度发现矩阵）
-3. 运行 Phase 1.5 自动检查（调用 merge_research.py）
+2. 执行 Phase 1.9（跨维度发现矩阵）
+3. 运行 Phase 2 自动检查（调用 merge_research.py）
 4. 用户确认后 → Phase 2 提炼
 
 > **为什么这样设计**：主 session 的上下文窗口有限，不适合做 8 路并行搜索。
@@ -151,7 +151,7 @@ ${PLAYER_DIR}references/sources/      # 采访字幕/数据截图/比赛记录
 
 # 脚本目录（由 qiuyuan.skill 提供，生成 Skill 时一并复制）
 ${PLAYER_DIR}scripts/
-    merge_research.py    # Phase 1.5 自动检查（必须在进入 Phase 2 前运行）
+    merge_research.py    # Phase 2 自动检查（必须在进入 Phase 2.1 前运行）
     quality_check.py     # Phase 3 产出 SKILL.md 后的质量自检
     download_subtitles.sh  # YouTube 视频字幕下载（采集阶段用）
     srt_to_transcript.py   # 字幕清洗（采集阶段用）
@@ -184,7 +184,7 @@ cd ~/.claude/skills/leao-perspective.skill/references/research/
 背景层：⑦ ⑧        →  "他为什么会这样踢？"
 ```
 
-#### 核心4路（揭示踢球本质）
+#### Phase 1.1-1.4：踢球层（核心4路）
 
 | Agent | 研究维度 | 核心问题 | 输出文件 |
 |-------|---------|---------|---------|
@@ -193,25 +193,25 @@ cd ~/.claude/skills/leao-perspective.skill/references/research/
 | **③ 身体与极限** | 速度耐力、身体条件决定的战术边界、大赛/逆境表现 | 他的身体决定了他能做什么选择？哪些技术动作他做不了？ | `references/research/03-physical.md` |
 | **④ 体系契合** | 最强/最弱体系、单核还是辅助、队友互补性 | 什么体系/队友让他更强，什么让他消失？为什么有些球员换个队就不行了？ | `references/research/04-system.md` |
 
-#### 生态2路（外部环境与社交）
+#### Phase 1.5-1.6：生态层（社交2路）
 
 | Agent | 研究维度 | 核心问题 | 为什么重要 | 输出文件 |
 |-------|---------|---------|---------|---------|
 | **⑤ 媒体叙事** | 主流媒体/专业人士评价、转会传闻、舆论压力；**舆论高光时刻**（热梗/名场面/大众共识标签） | 俱乐部怎么看他？外界给他的标签是什么？这个标签和实际是否一致？ | 直接影响场上压力和更衣室状态 | `references/research/05-media.md` |
 | **⑥ 社交动态** | ins/twitter/微博、赛后感言、更衣室动态、与队友关系；**争议事件行为模式**（场下言论争议/转会争议/私生活曝光的处理方式） | 他怎么表达自己？争议来临时他怎么应对？ | 揭示真实性格和情商，争议处理方式直接反映他的心理边界 | `references/research/06-social.md` |
 
-#### 背景2路（了解过去与关键时刻）
+#### Phase 1.7-1.8：背景层（历史2路）
 
 | Agent | 研究维度 | 核心问题 | 输出文件 |
 |-------|---------|---------|---------|
 | **⑦ 关键时刻** | 关键进球、点球大战、逆转时刻的表现模式 | 高压力下他怎么应对？大赛淘汰赛他表现更好还是更差？ | `references/research/07-moments.md` |
 | **⑧ 生涯轨迹** | 成长路径、踢球方式演变、巅峰期、关键转折点 | 他现在为什么是这样踢球？在哪里踢出来？ | `references/research/08-career.md` |
 
-#### Agent 维度深度说明
+#### Phase 1.x 补充说明
 
 有些维度的研究需要专项方法，单独说明：
 
-**⑤ 媒体叙事 → 舆论高光时刻专项**
+**① 空间决策 → 舆论高光时刻专项**
 
 热梗/名场面/大众共识标签，是舆论对球员最高密度的认知压缩。
 
@@ -295,7 +295,7 @@ cd ~/.claude/skills/leao-perspective.skill/references/research/
 
 2. **研究本维度**，将结果写入 `references/research/0X-xxx.md`（完整路径）
 
-3. **不要**在自己的报告里写"跨维度发现"——那是 Phase 1.4 由主 session 统一做的。
+3. **不要**在自己的报告里写"跨维度发现"——那是 Phase 1.9 由主 session 统一做的。
    subagent 的职责是：把本维度调研清楚、记录来源、标注信息不足之处。
 
 4. **每个 subagent 的输出格式**（统一，方便后续主 session 读取）：
@@ -314,7 +314,7 @@ cd ~/.claude/skills/leao-perspective.skill/references/research/
    ```
 
 > ⚠️ **禁止**：不要在 subagent 里尝试读取其他 Agent 的报告——subagent 上下文里看不到这些文件。
-> 跨维度分析统一在 Phase 1.4 由主 session 做完。
+> 跨维度分析统一在 Phase 1.9 由主 session 做完。
 
 #### 信息源优先级
 
@@ -333,7 +333,7 @@ cd ~/.claude/skills/leao-perspective.skill/references/research/
 
 ---
 
-### Phase 1.4: 跨维度发现矩阵（主 session 执行）
+### Phase 1.9: 跨维度发现矩阵（主 session 执行）
 
 > **这个阶段是整个设计的核心。8路不是终点，跨维度连接才是。**
 
@@ -422,7 +422,7 @@ cat references/research/08-career.md
 
 ---
 
-### Phase 1.5: 调研 Review 检查点（自动化 + 用户确认）
+### Phase 2: 调研 Review 检查点（自动化 + 用户确认）
 
 前置条件：8 路报告 + 09-cross-matrix.md 全部完成。
 
@@ -452,7 +452,7 @@ python3 scripts/merge_research.py [球员名]
 > **意义**：用自动化检查替代用户肉眼审阅 8 份报告，既保证质量门控有效，又不让用户做大量重复劳动。
 
 
-### Phase 2: 框架提炼
+### Phase 2.1: 框架提炼
 
 > 所有框架提炼必须基于跨维度发现矩阵，不能只看单一维度的报告。
 
@@ -579,7 +579,7 @@ python3 scripts/merge_research.py [球员名]
 - 样本偏差（联赛水平、队友质量影响数据）
 - 最新数据截止时间
 
-### Phase 2.5: 提炼确认检查点
+### Phase 2.5: 提炼确认检查点（Phase 2.1 后）
 
 Phase 2 提炼完成后，暂停展示提炼摘要给用户确认：
 
