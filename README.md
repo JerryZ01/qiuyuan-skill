@@ -24,7 +24,46 @@
 
 ## 效果示例
 
+```bash
+# 蒸馏完 leao.skill 后，直接对话
 
+$ leao，这场对国米的比赛，对方边后卫压得很上，你怎么办？
+
+> 好说。他压上来，我第一反应是往他身后走，
+> 但不是跑边路那条线——我往内线切，
+> 他一压我身后就是空的。
+>
+> 说实话，意甲边后卫很少有能追上我的，
+> 但国米这个不一样，体能好，
+> 所以我判断他压上的时机，在他压上之前把节奏提起来。
+
+---
+
+$ 你觉得自己和 mbappe 的最大区别是什么？
+
+> 他快，真的快，纯速度我跑不过他。
+> 他是直线冲刺，我是变向。两种踢法。
+>
+> 但在禁区内一对一的时候，我比他稳。
+> 我的身体能帮我扛住后卫，他碰到特别壮的后卫会吃亏。
+>
+> 你问谁更强？我不评价。
+> 他的踢法不需要队友拉开宽度，我需要。
+
+---
+
+$ 你踢过最艰难的一场比赛是什么？
+
+> 2022年客场对热刺。那场我肠胃炎，上场之前吐了两次，
+> 教练问我能不能踢，我说能。
+>
+> 前60分钟我在场上就是走路，球到我脚下不敢带。
+> 但对面追平之后我反而来劲了——
+> 你不让我好过，我也不让你好过。
+>
+> 身体状态不好的时候，技术反而更干净。
+> 因为你想多了，身体会帮你做决定。
+```
 
 这不是角色扮演。每个回答都基于8路调研提炼的**战术模型 + 表达DNA**——捕捉的是他怎么踢球，不是他说了什么。
 
@@ -32,39 +71,18 @@
 
 ## 安装
 
-
-[38;5;250m███████╗██╗  ██╗██╗██╗     ██╗     ███████╗[0m
-[38;5;248m██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝[0m
-[38;5;245m███████╗█████╔╝ ██║██║     ██║     ███████╗[0m
-[38;5;243m╚════██║██╔═██╗ ██║██║     ██║     ╚════██║[0m
-[38;5;240m███████║██║  ██╗██║███████╗███████╗███████║[0m
-[38;5;238m╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝[0m
-
-┌   skills 
-│
-│  Tip: use the --yes (-y) and --global (-g) flags to install without prompts.
-[?25l│
-◇  Source: https://github.com/JerryZ01/qiuyuan-skill.git
-[?25h[?25l│
-◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository...[999D[J◑  Cloning repository...[999D[J◒  Cloning repository...[999D[J◐  Cloning repository...[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository[999D[J◑  Cloning repository[999D[J◒  Cloning repository[999D[J◐  Cloning repository[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository.[999D[J◑  Cloning repository.[999D[J◒  Cloning repository.[999D[J◐  Cloning repository.[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..[999D[J◒  Cloning repository..[999D[J◐  Cloning repository..[999D[J◓  Cloning repository..[999D[J◑  Cloning repository..│
-■  Failed to clone repository
-│
-│  Clone timed out after 60s. This often happens with private repos that require authentication.
-│
-│    Ensure you have access and your SSH keys or credentials are configured:
-│
-│    - For SSH: ssh-add -l (to check loaded keys)
-│
-│    - For HTTPS: gh auth status (if using GitHub CLI)
-│
-└  Installation failed
-
-[999D[J■  Canceled
-[?25h
+```bash
+npx skills add JerryZ01/qiuyuan-skill
+```
 
 然后在 Claude Code 里触发：
 
-
+```
+> 蒸馏 leao
+> 分析哈兰德的踢法
+> 做个 leao 的战术视角
+> 用 mbappe 的视角分析这场比赛
+```
 
 ---
 
@@ -72,7 +90,13 @@
 
 球员是社会中人，也是场上决策者。采集分三层：
 
-
+```
+踢球层（核心）              生态层              背景层
+① 空间决策                  ⑤ 媒体叙事          ⑦ 关键时刻
+② 技术决策库                ⑥ 社交动态          ⑧ 生涯轨迹
+③ 身体与极限
+④ 体系契合
+```
 
 **踢球层**回答"他怎么踢的"——空间决策、技术选择、身体边界、体系统治力。**生态层**回答"他现在处于什么环境"——舆论标签 vs 真实表现、场下争议处理方式。**背景层**回答"他为什么会这样"——关键时刻表现、生涯演变轨迹。
 
@@ -102,7 +126,20 @@
 
 ## 仓库结构
 
-
+```
+qiuyuan-skill/
+├── SKILL.md                          # 蒸馏框架（Claude Code 触发用这个）
+├── README.md                         # 本文件
+├── LICENSE                           # MIT 许可证
+├── scripts/
+│   ├── download_subtitles.sh         # YouTube 视频字幕下载
+│   ├── srt_to_transcript.py          # 字幕清洗（SRT → 纯文本）
+│   ├── collect_sources.py            # 球员视频/数据元数据采集
+│   ├── merge_research.py             # 调研合并 + Phase 1.5 检查点生成
+│   ├── quality_check.py              # SKILL.md 交付前质量自检
+│   └── MANUAL_COLLECTION.md          # 完整采集操作指南
+└── references/                       # 一手素材（用户可自行扩充）
+```
 
 ---
 
@@ -120,12 +157,11 @@ MIT — 随便用，随便改，随便蒸馏。
 
 <div align="center">
 
-**集锦** 告诉你他进过什么球。<br>
-**qiuyuan-skill** 帮你用他的方式看比赛。<br><br>
+**集锦** 告诉你他进过什么球。  
+**qiuyuan-skill** 帮你用他的方式看比赛。
+
 *足球是空间的博弈。*
 
-<br>
-
-MIT License © [JerryZ01](https://github.com/JerryZ01)
+MIT License &copy; [JerryZ01](https://github.com/JerryZ01)
 
 </div>
