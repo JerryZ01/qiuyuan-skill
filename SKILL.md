@@ -109,7 +109,7 @@ ${PLAYER_DIR}scripts/                 # 采集脚本/清洗脚本
 **正确做法**：
 ```bash
 # 进入正确的目录再开始写文件
-cd ~/.claude/skills/莱奥.skill/references/research/
+cd ~/.claude/skills/leao-perspective.skill/references/research/
 # 然后写入 01-space.md, 02-decision.md, ...
 ```
 
