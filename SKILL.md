@@ -535,7 +535,7 @@ Phase 2 提炼完成后，暂停展示提炼摘要给用户确认：
 输出路径：~/.claude/skills/[球员英文名]-perspective.skill/
     示例：~/.claude/skills/leao-perspective.skill/
           ~/.claude/skills/mbappe-perspective.skill/
-          ~/.claude/skills/pep-guardiola-perspective.skill/
+          ~/.claude/skills/haaland-perspective.skill/
 ```
 
 **命名规则：**
