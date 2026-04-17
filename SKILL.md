@@ -104,11 +104,11 @@ PLAYER_DIR=~/.claude/skills/[球员英文名]-perspective.skill/
 
 # 调研报告目录
 ${PLAYER_DIR}references/research/     # 8路Agent报告 + 跨维度矩阵
-# 示例：莱奥 → ~/.claude/skills/leao-perspective.skill/references/research/
+# 示例：leao → ~/.claude/skills/leao-perspective.skill/references/research/
 
 # 一手素材目录
 ${PLAYER_DIR}references/sources/      # 采访字幕/数据截图/比赛记录
-# 示例：莱奥 → ~/.claude/skills/leao-perspective.skill/references/sources/
+# 示例：leao → ~/.claude/skills/leao-perspective.skill/references/sources/
 
 # 脚本目录（可选）
 ${PLAYER_DIR}scripts/                 # 采集脚本/清洗脚本
