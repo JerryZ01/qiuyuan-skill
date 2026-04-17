@@ -351,7 +351,10 @@ cd ~/.claude/skills/leao-perspective.skill/references/research/
    ```bash
    mkdir -p ~/.claude/skills/[球员名]-perspective.skill/references/research/
    mkdir -p ~/.claude/skills/[球员名]-perspective.skill/references/sources/
+   mkdir -p ~/.claude/skills/[球员名]-perspective.skill/scripts/
    ```
+
+   > **scripts 目录说明**：蒸馏完成后，主 session 将 `~/.claude/skills/qiuyuan.skill/scripts/` 下的文件复制到 `~/.claude/skills/[球员名]-perspective.skill/scripts/`，包括 merge_research.py、quality_check.py 等工具脚本。
 
 2. **研究本维度**，将结果写入 `references/research/0X-xxx.md`（完整路径）
 
@@ -672,7 +675,47 @@ Phase 2 提炼完成后，暂停展示提炼摘要给用户确认：
 
 #### 目录与命名规范
 
+蒸馏完成后，最终产物目录结构：
+
 ```markdown
+~/.claude/skills/[球员英文名]-perspective.skill/
+├── SKILL.md                          # 本 Skill 的核心文件（角色规则+战术模型+回答工作流）
+├── references/
+│   ├── research/                     # 8路调研报告 + 跨维度矩阵
+│   │   ├── 01-space.md ~ 08-career.md
+│   │   └── 09-cross-matrix.md
+│   └── sources/                      # 一手素材（采访字幕/数据截图，可选）
+├── scripts/                          # 工具脚本（由 qiuyuan.skill 复制）
+│   ├── merge_research.py             # Phase 2 自动检查
+│   └── quality_check.py              # SKILL.md 交付前质量自检
+```
+
+> **scripts 目录来源**：主 session 在 Phase 3 构建时，从 `~/.claude/skills/qiuyuan.skill/scripts/` 批量复制到目标目录。
+
+#### 构建步骤（按顺序执行）
+
+1. **确认目录存在**
+   ```bash
+   mkdir -p ~/.claude/skills/[球员名]-perspective.skill/references/research/
+   mkdir -p ~/.claude/skills/[球员名]-perspective.skill/references/sources/
+   mkdir -p ~/.claude/skills/[球员名]-perspective.skill/scripts/
+   ```
+
+2. **复制 scripts 目录**（把 qiuyuan.skill 的工具脚本复制到目标目录）
+   ```bash
+   cp ~/.claude/skills/qiuyuan.skill/scripts/merge_research.py       ~/.claude/skills/qiuyuan.skill/scripts/quality_check.py       ~/.claude/skills/[球员名]-perspective.skill/scripts/
+   ```
+   > 复制后，目标 `scripts/` 目录结构为：
+   > ```
+   > scripts/
+   > ├── merge_research.py   # Phase 2 自动质量检查
+   > └── quality_check.py    # SKILL.md 交付前自检
+   > ```
+
+3. **写入生成的 SKILL.md**（角色规则 + 战术模型 + 回答工作流）
+
+4. **复制 references/sources/**（若有用户提供的一手素材）
+
 输出路径：~/.claude/skills/[球员英文名]-perspective.skill/
     示例：~/.claude/skills/leao-perspective.skill/
           ~/.claude/skills/mbappe-perspective.skill/
