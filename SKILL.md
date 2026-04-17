@@ -91,11 +91,11 @@ PLAYER_DIR=~/.claude/skills/[球员英文名]-perspective.skill/
 
 # 调研报告目录
 ${PLAYER_DIR}references/research/     # 8路Agent报告 + 跨维度矩阵
-# 示例：莱奥 → ~/.claude/skills/leao-perspective.skill/references/research/
+# 示例：leao → ~/.claude/skills/leao-perspective.skill/references/research/
 
 # 一手素材目录
 ${PLAYER_DIR}references/sources/      # 采访字幕/数据截图/比赛记录
-# 示例：莱奥 → ~/.claude/skills/leao-perspective.skill/references/sources/
+# 示例：leao → ~/.claude/skills/leao-perspective.skill/references/sources/
 
 # 脚本目录（可选）
 ${PLAYER_DIR}scripts/                 # 采集脚本/清洗脚本
@@ -518,29 +518,29 @@ cd ~/.claude/skills/leao-perspective.skill/references/research/
 
 | 球员 | 特点 | 适用场景 |
 |------|------|---------|
-| 梅西 | 球王、内收型前锋、历史最佳 | 进攻组织、创造力分析 |
-| C罗 | 射手、领袖、身体素质巅峰 | 终结能力、大场面分析 |
-| 姆巴佩 | 速度、内锋、皇马核心 | 边路突破、反击分析 |
-| 哈兰德 | 中锋、禁区杀手、身体流 | 终结选择、中锋战术 |
-| 德布劳内 | 中场指挥官、远射、传球 | 组织进攻、定位球 |
+| messi | 球王、内收型前锋、历史最佳 | 进攻组织、创造力分析 |
+| ronaldo | 射手、领袖、身体素质巅峰 | 终结能力、大场面分析 |
+| mbappe | 速度、内锋、皇马核心 | 边路突破、反击分析 |
+| haaland | 中锋、禁区杀手、身体流 | 终结选择、中锋战术 |
+| de-bruyne | 中场指挥官、远射、传球 | 组织进攻、定位球 |
 | leao | 左路爆破、意甲MVP | 边锋战术、1v1突破 |
-| 孙兴慜 | 无球跑位、左右脚均衡 | 无球战术、跑位时机 |
-| 贝林厄姆 | 多位置、前插得分 | 位置灵活性、B2B分析 |
-| 齐达内 | 中场大师、优雅决策 | 中场组织、领袖力 |
-| 哈维 | 控球中场、战术大脑 | 传球体系、战术执行 |
-| 小罗 | 桑巴盘带、天赋型前腰 | 技术流、创造力 |
-| 罗纳尔多 | 现象级中锋、综合能力 | 终结能力、中锋模板 |
+| son | 无球跑位、左右脚均衡 | 无球战术、跑位时机 |
+| bellingham | 多位置、前插得分 | 位置灵活性、B2B分析 |
+| zidane | 中场大师、优雅决策 | 中场组织、领袖力 |
+| xavi | 控球中场、战术大脑 | 传球体系、战术执行 |
+| ronaldinho | 桑巴盘带、天赋型前腰 | 技术流、创造力 |
+| ronaldo-br | 现象级中锋、综合能力 | 终结能力、中锋模板 |
 
 ### 🧑‍🏫 教练
 
 | 教练 | 体系特点 | 适用场景 |
 |------|---------|---------|
-| 瓜迪奥拉 | 控球、肋部渗透、高位压迫 | 体系构建、战术迭代 |
-| 安切洛蒂 | 灵活应变、攻守平衡 | 临场调整、球员管理 |
-| 克洛普 | 高位逼抢、跑动强度 | 体能战术、压迫体系 |
-| 弗格森 | 心理调控、进攻足球 | 领袖力、逆转能力 |
-| 穆里尼奥 | 防守反击、针对性布置 | 战术限制、定位球 |
-| 阿尔特塔 | 控球+反击结合、年轻阵容 | 建队思路、战术演进 |
+| pep-guardiola | 控球、肋部渗透、高位压迫 | 体系构建、战术迭代 |
+| ancelotti | 灵活应变、攻守平衡 | 临场调整、球员管理 |
+| klopp | 高位逼抢、跑动强度 | 体能战术、压迫体系 |
+| sir-alex-ferguson | 心理调控、进攻足球 | 领袖力、逆转能力 |
+| mourinho | 防守反击、针对性布置 | 战术限制、定位球 |
+| arteta | 控球+反击结合、年轻阵容 | 建队思路、战术演进 |
 
 ---
 
