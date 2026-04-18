@@ -1,148 +1,237 @@
 # 球探 · 球员信息来源采集指南
 
-> ⚠️ **网络环境说明**：WSL2 下 YouTube/B站/API 部分平台存在访问限制，
-> 建议在 **Windows 浏览器** 或配置 **VPN/代理** 后使用。
-> 脚本负责组织结构和处理已下载的文件。
+> ⚠️ **网络环境说明**：YouTube、B站、公开数据平台在不同系统和网络环境下可达性差异很大。
+> 建议优先在本机浏览器确认可访问，再决定是否使用脚本辅助。脚本的职责是**组织采集结果、清洗文本、做质量检查**，不是保证所有平台都能稳定抓取。
 
 ---
 
-## 信息来源优先级（足球领域）
+## 设计原则
 
-| 优先级 | 来源 | 类型 | 覆盖维度 |
-|--------|------|------|---------|
-| 🥇 最高 | 球员本人采访字幕 | 视频字幕 | 表达DNA、战术哲学 |
-| 🥈 高 | 比赛解说/高光字幕 | 视频字幕 | 场景决策、技术动作 |
-| 🥉 中 | 球员社交媒体 | 文本/图片 | 表达风格、公众形象 |
-| 📊 低 | 数据平台（FBref/Wyscout） | 统计数据 | 数据画像、能力边界 |
-| 📰 辅助 | 专业媒体（The Athletic等） | 文章 | 外部视角、生涯轨迹 |
+采集不是“抓越多越好”，而是按优先级拿到**最能解释球员决策逻辑**的材料：
+
+1. **一手表达**：采访、赛后发言、长对谈字幕
+2. **一手比赛**：全场、集锦、战术拆解对应的字幕或笔记
+3. **结构化数据**：FBref、Transfermarkt、SofaScore 等公开数据
+4. **二手叙事**：媒体分析、球迷共识、舆论标签
+
+最终目标不是堆链接，而是把素材放进下面这个结构里，方便 8 路研究复用。
+
+---
+
+## 推荐目录结构
+
+蒸馏某位球员时，建议在**目标 Skill 目录**里建立素材目录，而不是堆在当前仓库：
+
+```text
+~/.claude/skills/球员名-perspective.skill/
+└── references/
+    └── sources/
+        ├── transcripts/
+        ├── interviews/
+        ├── matches/
+        ├── social/
+        └── data/
+```
+
+例如：
+
+```text
+~/.claude/skills/leao-perspective.skill/
+└── references/
+    └── sources/
+        ├── transcripts/
+        ├── interviews/
+        ├── matches/
+        ├── social/
+        └── data/
+```
+
+这样和 `SKILL.md` 里的输出路径规范保持一致：
+- 调研报告放 `references/research/`
+- 原始素材放 `references/sources/`
+- 配套脚本放 `scripts/`
 
 ---
 
 ## 快速采集流程
 
-### Step 1: 创建球员目录
+### Step 1：创建球员目录
 
 ```bash
-# 在 skill 目录下创建球员专属目录
-mkdir -p ~/.claude/skills/qiuyuan.skill/references/sources/梅西
-cd ~/.claude/skills/qiuyuan.skill/references/sources/梅西
+mkdir -p ~/.claude/skills/leao-perspective.skill/references/sources
+mkdir -p ~/.claude/skills/leao-perspective.skill/references/research
+mkdir -p ~/.claude/skills/leao-perspective.skill/scripts
 
-# 子目录结构
-mkdir -p transcripts/ interviews/ matches/ social/ data/
+mkdir -p ~/.claude/skills/leao-perspective.skill/references/sources/transcripts
+mkdir -p ~/.claude/skills/leao-perspective.skill/references/sources/interviews
+mkdir -p ~/.claude/skills/leao-perspective.skill/references/sources/matches
+mkdir -p ~/.claude/skills/leao-perspective.skill/references/sources/social
+mkdir -p ~/.claude/skills/leao-perspective.skill/references/sources/data
 ```
 
-### Step 2: 获取采访/高光视频 → 字幕
+### Step 2：获取采访 / 高光 / 全场对应素材
 
-**方式A: YouTube（推荐）**
+**方式 A：浏览器手动找素材，再用脚本处理**
 
-在 Windows 浏览器打开 YouTube，搜索：
-- `梅西 球员 采访`
-- `Messi interview tactics`
-- `梅西 全场 比赛 高光`
+优先搜索：
+- `球员名 interview`
+- `球员名 tactics`
+- `球员名 full match`
+- `球员名 post match interview`
+- `球员名 战术分析`
+- `球员名 全场`
 
-下载字幕（任意方式）：
-```
-# 推荐：yt-dlp（WSL2 下需代理）
-export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
+推荐保存策略：
+- 采访字幕 / 转录文本 → `transcripts/`
+- 比赛笔记 / 全场片段说明 → `matches/`
+- 媒体长文 / 专栏摘录 → `interviews/`
+- 社媒截图或整理文本 → `social/`
+- 数据导出 / 手工摘录 → `data/`
 
-yt-dlp --write-subs --write-auto-subs \
-  --sub-langs "zh-Hans,zh-Hant,zh,en" \
-  --convert-subs srt \
-  --output "./%(title)s" \
-  "https://www.youtube.com/watch?v=VIDEO_ID"
-```
+**方式 B：YouTube 字幕辅助下载**
 
-**方式B: B站（B站有大量足球内容）**
-
-1. 打开 B站，搜索球员采访/战术分析视频
-2. 用 **B站下载器**（Downkyi/唧唧）下载，导出字幕
-3. 将 `.srt` 文件复制到 `transcripts/` 目录
-
-### Step 3: 清洗字幕 → 纯文本
+如果本地网络可访问 YouTube，可以使用：
 
 ```bash
-python3 ~/.claude/skills/qiuyuan.skill/scripts/srt_to_transcript.py \
-  ./梅西采访.srt \
-  ./梅西采访_清洗.txt
+bash scripts/download_subtitles.sh "https://www.youtube.com/watch?v=VIDEO_ID" "./tmp"
+python3 scripts/srt_to_transcript.py "./tmp/VIDEO_ID.srt" "./tmp/VIDEO_ID.txt"
 ```
 
-### Step 4: 采集数据（手动）
+说明：
+- `download_subtitles.sh` 只负责尽量下载可用字幕
+- 下载失败通常是网络、区域、视频本身无字幕导致，不代表流程不可继续
+- 采集工作本质上允许**手动补素材**，不要把流程绑死在单一平台
 
-访问以下公开数据网站：
+### Step 3：清洗字幕 → 纯文本
 
-| 网站 | 内容 | 访问方式 |
-|------|------|---------|
-| FBref | 进球/传球/防守数据 | https://fbref.com 搜索球员 |
-| Transfermarkt | 转会/身价/履历 | https://transfermarkt.com 搜索球员 |
-| SofaScore | 场均数据/热力图 | https://sofascore.com 搜索球员 |
-| Opta | 战术数据/对抗数据 | The Athletic 等媒体引用 |
+```bash
+python3 scripts/srt_to_transcript.py "./某采访.srt" "./某采访_清洗.txt"
+```
 
-### Step 5: 采集社交媒体
+清洗后建议把文本移动到对应目录，例如：
 
-| 平台 | 球员账号 | 内容 |
-|------|---------|------|
-| Instagram | @leomessi 等 | 日常、赛后感言 |
-| Twitter/X | @teammessi 等 | 即时反应、观点 |
-| 微博 | 球员官方账号 | 中文受众内容 |
+```text
+references/sources/transcripts/leao-post-match-2024.txt
+```
+
+### Step 4：采集公开数据
+
+建议手动打开这些站点搜索球员，并把关键结论整理成 txt / md：
+
+| 网站 | 内容 |
+|------|------|
+| FBref | 进球、传球、防守、持球等结构化数据 |
+| Transfermarkt | 转会、履历、位置、伤病、身价 |
+| SofaScore | 赛季评分、基础热区、比赛表现 |
+| The Athletic / 专栏媒体 | 战术拆解、教练评价、队友视角 |
+
+推荐保存方式：
+- 手工摘录成 `data/fbref_2025.txt`
+- 媒体摘要放 `interviews/the-athletic_profile_2024.txt`
+
+### Step 5：采集社交媒体与舆论线索
+
+可关注：
+- Instagram / X / 微博 官方账号
+- 赛后发言、长文、争议声明
+- 高赞评论区的共识标签
+
+这部分主要服务于：
+- 表达 DNA
+- 公众形象
+- 争议应对方式
+- 更衣室 / 团队生态的外部折射
 
 ---
 
 ## 快速检查清单
 
-```
+```text
 references/sources/球员名/
-├── transcripts/           ← 视频字幕（.srt 或 .txt）
-│   ├── 2022世界杯采访.txt
-│   └── 巴萨更衣室采访.srt
-├── interviews/            ← 文字采访记录
-│   └── the-athletic-2023.txt
-├── matches/               ← 比赛分析片段
-│   └── 2022世界杯决赛分析.srt
-├── social/                ← 社交媒体内容
-│   └── 世界杯夺冠instagram.txt
-└── data/                  ← 统计数据截图/导出
+├── transcripts/           ← 视频字幕或清洗后的纯文本
+│   ├── 2022-world-cup-interview.txt
+│   └── post-match-derby.srt
+├── interviews/            ← 文字采访 / 专栏摘录
+│   └── the-athletic-2024.txt
+├── matches/               ← 全场观察笔记 / 战术片段记录
+│   └── champions-league-quarterfinal-notes.txt
+├── social/                ← 社媒内容 / 争议事件整理
+│   └── instagram-post-title-run.txt
+└── data/                  ← 统计数据摘录 / 手动整理
     ├── fbref_2024.txt
     └── transfermarkt_profile.txt
 ```
 
+建议最低标准：
+- 采访或长字幕 ≥ 2 份
+- 比赛相关素材 ≥ 2 份
+- 数据资料 ≥ 1 份
+- 社媒 / 舆论线索 ≥ 1 份
+
+如果低于这个量级，后续蒸馏时要明确标注边界，避免把猜测写成定论。
+
 ---
 
-## 快速使用流程（Claude Code 里）
+## 快速使用流程
 
-有了素材后，直接告诉 Claude Code：
+有了素材后，可以直接告诉 Claude Code：
 
+```text
+leao 的采访记录在 references/sources/transcripts/，
+比赛笔记在 references/sources/matches/，
+数据资料在 references/sources/data/，
+请按 qiuyuan 的 8 路框架继续蒸馏。
 ```
-"梅西的采访记录在 ./transcripts/ 目录下，
-数据在 ./data/ 目录下，
-帮我蒸馏梅西的球员Skill"
-```
 
-Claude Code 会读取这些素材，按 qiuyuan.skill 的框架生成球员 Skill。
+这样主流程会更顺：
+1. 先读本地素材
+2. 再补公开信息
+3. 进入 8 路研究
+4. 生成 `09-cross-matrix.md`
+5. 再做 Skill 提炼
 
+---
 
 ## 配套脚本说明
 
-### merge_research.py — 调研合并 + Phase 1.5 生成
+### `collect_sources.py` — 采集入口脚本
 
+用途：
+- 创建标准目录
+- 记录视频 / 数据 / 平台搜索结果摘要
+- 给后续人工筛选提供起点
 
+它更像“采集助手”，不是全自动爬虫。
 
-自动扫描 ，统计：
-- 每路Agent的来源数量（一手/二手）
-- 跨维度矩阵是否已生成
-- 矛盾点数量
-- 输出 Phase 1.5 质量检查点表格
+### `download_subtitles.sh` — YouTube 字幕下载
 
-### quality_check.py — SKILL.md 质量自检
+用途：
+- 优先尝试人工字幕
+- 失败时回退到自动字幕
 
+适用场景：
+- 本地网络可访问 YouTube
+- 只是想尽快拿到一版可清洗文本
 
+### `srt_to_transcript.py` — 字幕清洗
 
-在交付前执行，逐项检查：
-- 战术模型数量（3-7个）
-- 禁区行为（≥3条）
-- 身体极限边界
-- 生态背景覆盖
-- 诚实边界（≥3条）
-- 身份卡存在性
-- AI模板味检测
-- 跨维度发现覆盖
+用途：
+- 去掉时间轴、序号、HTML 标签
+- 合并有效文本
+- 清洗成可读纯文本
 
+### `merge_research.py` — 调研合并与检查点生成
+
+用途：
+- 统计 8 路报告覆盖情况
+- 估算一手 / 二手来源命中
+- 检查 `09-cross-matrix.md` 是否存在
+- 输出进入提炼前的检查表
+
+### `quality_check.py` — 交付前质量自检
+
+用途：
+- 检查生成的 `SKILL.md` 是否满足结构要求
+- 重点看战术模型、禁区行为、身体边界、生态层、诚实边界、表达 DNA 等模块是否具备
+
+它不是“真理判定器”，而是避免交付明显空心 Skill 的最后一道门。
