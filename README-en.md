@@ -240,12 +240,6 @@ GitHub: [JerryZ01](https://github.com/JerryZ01)
 
 ---
 
-## License
-
-MIT — use it, modify it, distill with it.
-
----
-
 <div align="center">
 
 **Highlights** tell you what goals he scored.  

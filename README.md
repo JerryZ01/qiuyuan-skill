@@ -231,12 +231,6 @@ GitHub: [JerryZ01](https://github.com/JerryZ01)
 
 ---
 
-## 许可证
-
-MIT — 随便用，随便改，随便蒸馏。
-
----
-
 <div align="center">
 
 **集锦** 告诉你他进过什么球。  
